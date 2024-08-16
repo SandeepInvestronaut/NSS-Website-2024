@@ -57,7 +57,8 @@ const programs = [
     Cicon_text: "6th August 2023",
     Licon_text: "Anandvan-1, NIBM Road Kondhwa, Pune",
     title: "Tree Plantation Drive",
-    subtitle: "BRACT had successfully completed a Tree Plantation Drive...",
+    subtitle:
+      "BRACT had successfully completed a Tree Plantation Drive... on 6th August 2023 in collaboration with Tech Mahindra with 30+ student volunteers participating. This drive started at 8:00 AM at Anandvan-1, NIBM Road, Kondhwa, Pune.",
     Rmore: "Read More",
   },
   {
@@ -65,7 +66,7 @@ const programs = [
     Ciocn: "Assets/calender.png",
     Licon: "Assets/location.png",
     Cicon_text: "13th August 2023",
-    Licon_text: "Saint Crispin’s Home krave road.",
+    Licon_text: "Saint Crispin’s Home, Karve Road",
     title: "Food Donation Drive",
     subtitle: "This initiative by BRACT involved food donation drives at...",
     Rmore: "Read More",
@@ -100,7 +101,7 @@ function createProgramHTML(program) {
                 </div>
                 <p class="card_one_text">${program.title}</p>
                 <p class="card_one_two">
-                    ${program.subtitle.split("...")[0]}
+                    ${program.subtitle.split("...")[0]}<span>...</span>
                     <span class="extra-text hidden">${
                       program.subtitle.split("...")[1]
                     }</span>
@@ -112,12 +113,16 @@ function createProgramHTML(program) {
 }
 
 function toggleText(button) {
-  const extraText = button.previousElementSibling.querySelector(".extra-text");
+  const cardText = button.previousElementSibling;
+  const extraText = cardText.querySelector(".extra-text");
+  const dots = cardText.querySelector("span:not(.extra-text)"); // Select the span with "..."
   if (extraText.classList.contains("hidden")) {
     extraText.classList.remove("hidden");
+    dots.style.display = "none"; // Hide the dots
     button.textContent = "Read Less";
   } else {
     extraText.classList.add("hidden");
+    dots.style.display = "inline"; // Show the dots
     button.textContent = "Read More";
   }
 }
@@ -160,6 +165,13 @@ const Testimonials = [
     Tdesignation: "Mechanical Engineering",
     Tinfo:
       "Participating in the blood donation drive at college was a truly humbling experience. As an engineering student, I'm used to problem-solving with calculations, but this drive helped me understand the human cost of those problems. Seeing the relief on the faces of potential recipients as they learned about increased blood availability was a powerful reminder of the impact we can have through such simple acts of service. It definitely made me more aware of the importance of regular blood donation and motivated me to become a lifelong donor.",
+  },
+  {
+    Tavatar: "Assets/t_two.png",
+    Tname: "Amit Kumar",
+    Tdesignation: "Electrical Engineering",
+    Tinfo:
+      "The environment awareness campaign gave me a platform to utilize my communication skills beyond technical presentations. Developing and presenting educational material on sustainable practices to our local community was a challenging yet enriching experience. Seeing the spark of interest and commitment to environmental protection in the audience's eyes was truly rewarding. This drive taught me the power of raising awareness and motivated me to explore sustainable practices in my daily life and future engineering career.",
   },
 ];
 
@@ -204,3 +216,69 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 });
+
+const member = [
+  {
+    bgImg: "Assets/member1.png",
+    title: "Shri. Rajkumar Bansilal Agarwal",
+    subtitle: "Chief Trustee",
+  },
+  {
+    bgImg: "Assets/member2.png",
+    title: "Smt. Amita Rajkumar Agarwal",
+    subtitle: "Trustee",
+  },
+  {
+    bgImg: "Assets/member3.png",
+    title: "Shri. Bharat Rajkumar Agarwal",
+    subtitle: "Managing Trustee",
+  },
+  {
+    bgImg: "Assets/member4.png",
+    title: "Shri. Narendra Parasmal Jain",
+    subtitle: "Advisory Trustee",
+  },
+];
+
+function createMemeber(member) {
+  return `
+<div class="col-md-3">
+<div class="member_card">
+<div class="member_img">
+<img src="${member.bgImg ? member.bgImg : "Assets/member_placeholder.png"}"/>
+</div>
+<div class="info">
+<p>${member.title}</p>
+<p>${member.subtitle}</p>
+</div>
+</div>
+</div>
+`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const memberRow = document.getElementById("member_row");
+  member.forEach((memberData) => {
+    memberRow.innerHTML += createMemeber(memberData);
+  });
+});
+
+
+
+//News Updated Show More Toggle
+
+function newsUpdate(spanId, newsID, button) {
+  const extraText = document.getElementById(spanId);
+  const dots = document.getElementById(newsID);
+  
+  if (extraText.classList.contains("hidden")) {
+    extraText.classList.remove("hidden");
+    dots.style.display = 'none';
+    button.textContent = "Show Less";
+  } else {
+    extraText.classList.add("hidden");
+    dots.style.display = 'inline';
+    button.textContent = "Read More";
+  }
+}
+
