@@ -282,3 +282,35 @@ function newsUpdate(spanId, newsID, button) {
   }
 }
 
+
+/* Team Page JS Code */
+
+//pdf popup
+
+var modal = document.getElementById('pdfModal');
+var btn = document.getElementById('openPdfBtn');
+var closeBtn = document.querySelector('.close-btn');
+var pdfViewer = document.getElementById('pdfViewer');
+
+// When the user clicks the button, open the modal and load the PDF
+btn.onclick = function() {
+    modal.style.display = 'block';
+    pdfViewer.src = 'Assets/PDF/Free_Test_Data_100KB_PDF.pdf';
+
+    console.log(pdfViewer.src)
+     
+}
+
+// When the user clicks on the close button (X), close the modal
+closeBtn.onclick = function() {
+    modal.style.display = 'none';
+    pdfViewer.src = ''; // Clear the PDF source when modal is closed
+}
+
+// Close the modal if the user clicks anywhere outside of the modal content
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+        pdfViewer.src = '';
+    }
+}
